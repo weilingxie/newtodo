@@ -1,0 +1,22 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NewTodo", "src\NewTodo\NewTodo.csproj", "{84955AEC-F64F-4374-AAA0-900B2637E51C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NewTodo.Test", "NewTodo.Test\NewTodo.Test.csproj", "{14B132EF-A95E-428E-BEFC-4011569DFFAF}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{84955AEC-F64F-4374-AAA0-900B2637E51C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{84955AEC-F64F-4374-AAA0-900B2637E51C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{84955AEC-F64F-4374-AAA0-900B2637E51C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{84955AEC-F64F-4374-AAA0-900B2637E51C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{14B132EF-A95E-428E-BEFC-4011569DFFAF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{14B132EF-A95E-428E-BEFC-4011569DFFAF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{14B132EF-A95E-428E-BEFC-4011569DFFAF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{14B132EF-A95E-428E-BEFC-4011569DFFAF}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal
