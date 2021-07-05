@@ -26,20 +26,10 @@ namespace NewTodo.Controllers
         
         [HttpPost]
         [Route("")]
-        public async Task<IActionResult> CreateTodoItem(NewTodoInput todoInput, CancellationToken cancellationToken)
+        public async Task CreateTodoItem(NewTodoInput todoInput, CancellationToken cancellationToken)
         {
-            _logger.LogTrace("Begin: Register");
-            try
-            {
                 var command = new CreateTodoItemCommand(todoInput);
                 await _mediator.Send(command, cancellationToken);
-                return NoContent();
-            }
-            catch (Exception e)
-            {
-                _logger.LogTrace("Throw Exception");
-                return Conflict();
-            }
         }
     }
 }
