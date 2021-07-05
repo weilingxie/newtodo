@@ -8,19 +8,11 @@ namespace NewTodo.Application.TodoItem.Commands
 {
     public class CreateTodoItemCommand : IRequest<int>
     {
-        public NewTodoInput _todoInput;
+        public readonly NewTodoInput TodoInput;
 
         public CreateTodoItemCommand(NewTodoInput todoInput)
         {
-            _todoInput = todoInput;
-        }
-    }
-
-    public class CreateTodoItemCommandHandler : IRequestHandler<CreateTodoItemCommand, int>
-    {
-        public async Task<int> Handle(CreateTodoItemCommand request, CancellationToken cancellationToken)
-        {
-            throw new NotImplementedException();
+            TodoInput = todoInput;
         }
     }
 }

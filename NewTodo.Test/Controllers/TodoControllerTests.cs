@@ -35,7 +35,7 @@ namespace NewTodo.Test.Controllers
 
             _mediatorMock.Verify(
                 m => m.Send(
-                    It.Is<CreateTodoItemCommand>(c => c._todoInput == _validInput), CancellationToken.None),
+                    It.Is<CreateTodoItemCommand>(c => c.TodoInput == _validInput), CancellationToken.None),
                 Times.Once());
         }
 
