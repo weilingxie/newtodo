@@ -18,18 +18,19 @@ namespace NewTodo.Controllers
         private readonly IMediator _mediator;
         private readonly ILogger _logger;
 
-        public TodoController(IMediator mediator,ILogger logger)
+        public TodoController(IMediator mediator, ILogger logger)
         {
             _mediator = mediator;
             _logger = logger;
         }
-        
+
         [HttpPost]
         [Route("")]
-        public async Task CreateTodoItem(NewTodoInput todoInput, CancellationToken cancellationToken)
+        public async Task<IActionResult> CreateTodoItem(NewTodoInput todoInput, CancellationToken cancellationToken)
         {
-                var command = new CreateTodoItemCommand(todoInput);
-                await _mediator.Send(command, cancellationToken);
+            var command = new CreateTodoItemCommand(todoInput);
+            await _mediator.Send(command, cancellationToken);
+            return NoContent();
         }
     }
 }
