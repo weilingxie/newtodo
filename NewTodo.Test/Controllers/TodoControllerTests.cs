@@ -2,6 +2,7 @@ using System;
 using System.Threading;
 using System.Threading.Tasks;
 using MediatR;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using Moq;
 using NewTodo.Application.TodoItem.Commands;
@@ -36,6 +37,14 @@ namespace NewTodo.Test.Controllers
                 m => m.Send(
                     It.Is<CreateTodoItemCommand>(c => c._todoInput == _validInput), CancellationToken.None),
                 Times.Once());
+        }
+
+        [Fact]
+        public async Task ShouldReturnNoContent_IfMediatorIsAbleToSendWithoutErrors()
+        {
+            var action = await _controller.CreateTodoItem(_validInput, CancellationToken.None);
+
+            Assert.IsType<NoContentResult>(action);
         }
     }
 }
