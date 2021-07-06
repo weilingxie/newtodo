@@ -19,12 +19,14 @@ namespace NewTodo.Test.Controllers
         private readonly Mock<IMediator> _mediatorMock;
         private readonly TodoController _controller;
         private readonly NewTodoInput _validInput;
+        private readonly NewTodoInput _emptyUserIdInput;
 
         public TodoControllerTests()
         {
             var logger = new Mock<ILogger<TodoController>>();
             _mediatorMock = new Mock<IMediator>();
             _validInput = CreateValidNewTodoInputFaker().Generate();
+            _emptyUserIdInput = CreateEmptyUserIdNewTodoInputFaker().Generate();
             _controller = new TodoController(_mediatorMock.Object, logger.Object);
         }
 
@@ -45,6 +47,13 @@ namespace NewTodo.Test.Controllers
             var action = await _controller.CreateTodoItem(_validInput, CancellationToken.None);
 
             Assert.IsType<NoContentResult>(action);
+        }
+
+        [Fact]
+        public async Task ShouldReturnBadRequest_IfListIdIsNull()
+        {
+            var action = await _controller.CreateTodoItem(_emptyUserIdInput, CancellationToken.None);
+            Assert.IsType<BadRequestResult>(action);
         }
     }
 }
