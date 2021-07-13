@@ -13,15 +13,23 @@ namespace NewTodo.Test.Helpers
                 .RuleFor(t => t.Title, f => f.Lorem.Text());
             return faker;
         }
-        
-        public static Faker<NewTodoInput> CreateEmptyUserIdNewTodoInputFaker()
+
+        public static Faker<NewTodoInput> CreateEmptyGuidUserIdNewTodoInputFaker()
         {
             var faker = new Faker<NewTodoInput>()
                 .RuleFor(t => t.UserId, f => Guid.Empty.ToString())
                 .RuleFor(t => t.Title, f => f.Lorem.Text());
             return faker;
         }
-        
+
+        public static Faker<NewTodoInput> CreateEmptyUserIdNewTodoInputFaker()
+        {
+            var faker = new Faker<NewTodoInput>()
+                .RuleFor(t => t.UserId, f => "")
+                .RuleFor(t => t.Title, f => f.Lorem.Text());
+            return faker;
+        }
+
         public static Faker<NewTodoInput> CreateNullUserIdNewTodoInputFaker()
         {
             var faker = new Faker<NewTodoInput>()
@@ -29,7 +37,7 @@ namespace NewTodo.Test.Helpers
                 .RuleFor(t => t.Title, f => f.Lorem.Text());
             return faker;
         }
-        
+
         public static Faker<NewTodoInput> CreateNullTitleNewTodoInputFaker()
         {
             var faker = new Faker<NewTodoInput>()
@@ -37,7 +45,7 @@ namespace NewTodo.Test.Helpers
                 .RuleFor(t => t.Title, f => null);
             return faker;
         }
-        
+
         public static Faker<NewTodoInput> CreateEmptyTitleNewTodoInputFaker()
         {
             var faker = new Faker<NewTodoInput>()

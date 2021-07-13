@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading;
+﻿using System.Threading;
 using System.Threading.Tasks;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
@@ -28,8 +25,12 @@ namespace NewTodo.Controllers
         [Route("")]
         public async Task<IActionResult> CreateTodoItem(NewTodoInput todoInput, CancellationToken cancellationToken)
         {
+            if (!ModelState.IsValid) return BadRequest();
+
             var command = new CreateTodoItemCommand(todoInput);
+
             await _mediator.Send(command, cancellationToken);
+
             return NoContent();
         }
     }
