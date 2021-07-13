@@ -5,10 +5,10 @@ using System.Linq;
 using System.Reflection;
 using System.Text;
 using FluentValidation;
+using MediatR.Registration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using NewTodo.Application.TodoItem.Commands;
-using MediatR.Registration;
 using Xunit;
 
 namespace NewTodo.Test.Extensions
@@ -19,7 +19,7 @@ namespace NewTodo.Test.Extensions
         [Fact]
         public void CanResolveAllFluentValidators()
         {
-            var validators = 
+            var validators =
                 Assembly.GetAssembly(typeof(CreateTodoItemCommand))
                     ?.GetTypes()
                     .Where(t => !t.IsAbstract && IsAssignableToGenericType(t, typeof(IValidator<>)))
@@ -29,13 +29,13 @@ namespace NewTodo.Test.Extensions
 
             TryResolveTypes(validators);
         }
-        
+
         private static void TryResolveTypes(IEnumerable<Type> types)
         {
-            var host = Program.CreateHostBuilder(new string[]{})
+            var host = Program.CreateHostBuilder(new string[] { })
                 .UseEnvironment("Development").Build();
             var services = host.Services.CreateScope().ServiceProvider;
-            
+
             var errorBuilder = new StringBuilder();
             foreach (var serviceType in types)
             {
@@ -54,21 +54,18 @@ namespace NewTodo.Test.Extensions
 
         private static bool IsAssignableToGenericType(Type givenType, Type genericType)
         {
+            var checkType = givenType;
             while (true)
             {
-                var interfaceTypes = givenType.GetInterfaces();
+                var interfaceTypes = checkType.GetInterfaces();
 
-                if (interfaceTypes.Any(it => it.IsGenericType && it.GetGenericTypeDefinition() == genericType))
-                {
-                    return true;
-                }
+                if (interfaceTypes.Any(it => it.IsGenericType && it.GetGenericTypeDefinition() == genericType)
+                    || (checkType.IsGenericType && checkType.GetGenericTypeDefinition() == genericType)) return true;
 
-                if (givenType.IsGenericType && givenType.GetGenericTypeDefinition() == genericType) return true;
-
-                var baseType = givenType.BaseType;
+                var baseType = checkType.BaseType;
                 if (baseType == null) return false;
 
-                givenType = baseType;
+                checkType = baseType;
             }
         }
     }
