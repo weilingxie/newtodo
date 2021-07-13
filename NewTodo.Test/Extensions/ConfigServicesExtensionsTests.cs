@@ -1,5 +1,5 @@
-using System;
 using System.Collections;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
@@ -14,7 +14,7 @@ using Xunit;
 namespace NewTodo.Test.Extensions
 {
     [Trait("Category", "UnitTest")]
-    public class DependencyInjectionConfigTests
+    public class ConfigServicesExtensionsTests
     {
         [Fact]
         public void CanResolveAllFluentValidators()
