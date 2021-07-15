@@ -17,14 +17,12 @@ namespace NewTodo.Extensions
 
             services.AddScoped<IValidator<NewTodoInput>, NewTodoInputValidator>();
 
-            services.AddSwaggerGen(c => { c.SwaggerDoc("v1", new OpenApiInfo {Title = "NewTodo", Version = "v1"}); });
-
             return services;
         }
 
         public static IServiceCollection AddSwaggerServices(this IServiceCollection services)
         {
-            services.AddSwaggerGen(c => { c.SwaggerDoc("v1", new OpenApiInfo {Title = "NewTodo", Version = "v1"}); });
+            services.AddSwaggerGen(c => { c.SwaggerDoc("v1", new OpenApiInfo { Title = "NewTodo", Version = "v1" }); });
 
             return services;
         }
