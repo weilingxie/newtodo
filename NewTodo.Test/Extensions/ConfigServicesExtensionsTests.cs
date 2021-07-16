@@ -1,8 +1,7 @@
+using System;
 using FluentValidation;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using NewTodo.Application.TodoItem.Models;
-using System;
 using Xunit;
 
 namespace NewTodo.Test.Extensions
@@ -22,15 +21,7 @@ namespace NewTodo.Test.Extensions
         [Fact]
         public void CanFindFluentValidationConfiguration()
         {
-
             var result = services.GetService<ValidatorConfiguration>();
-            Assert.NotNull(result);
-        }
-
-        [Fact]
-        public void CanFindFluentValidation()
-        {
-            var result = services.GetService<IValidator<NewTodoInput>>();
             Assert.NotNull(result);
         }
     }
