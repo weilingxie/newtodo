@@ -14,7 +14,7 @@ namespace NewTodo.Test.Extensions
 
         public ConfigServicesExtensionsTests()
         {
-            host = Program.CreateHostBuilder(new string[] { }).Build();
+            host = Program.CreateHostBuilder(Array.Empty<string>()).Build();
             services = host.Services.CreateScope().ServiceProvider;
         }
 
