@@ -2,7 +2,6 @@
 using System.Threading.Tasks;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Logging;
 using NewTodo.Application.TodoItem.Commands;
 using NewTodo.Application.TodoItem.Models;
 
@@ -13,12 +12,10 @@ namespace NewTodo.Controllers
     public class TodoController : ControllerBase
     {
         private readonly IMediator _mediator;
-        private readonly ILogger _logger;
 
-        public TodoController(IMediator mediator, ILogger logger)
+        public TodoController(IMediator mediator)
         {
             _mediator = mediator;
-            _logger = logger;
         }
 
         [HttpPost]
