@@ -19,19 +19,16 @@ namespace NewTodo.Test.Controllers
         private readonly Mock<IMediator> _mediatorMock;
         private readonly TodoController _controller;
         private readonly NewTodoInput _validInput;
-        private readonly NewTodoInput _nullUserIdInput;
         private readonly NewTodoInput _emptyUserIdInput;
         private readonly NewTodoInputValidator _newTodoInputValidator;
 
         public TodoControllerTests()
         {
             _newTodoInputValidator = new NewTodoInputValidator();
-            var logger = new Mock<ILogger<TodoController>>();
             _mediatorMock = new Mock<IMediator>();
             _validInput = CreateValidNewTodoInputFaker().Generate();
-            _nullUserIdInput = CreateNullUserIdNewTodoInputFaker().Generate();
             _emptyUserIdInput = CreateEmptyUserIdNewTodoInputFaker().Generate();
-            _controller = new TodoController(_mediatorMock.Object, logger.Object);
+            _controller = new TodoController(_mediatorMock.Object);
         }
 
         [Fact]
