@@ -5,6 +5,9 @@ project.lock.json
 *.pyc
 nupkg/
 
+# Rider
+newtodo.sln.DotSettings.user
+
 # Visual Studio Code
 .vscode
 
