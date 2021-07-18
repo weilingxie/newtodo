@@ -5,7 +5,7 @@ namespace NewTodo.Application.TodoItem.Commands
 {
     public class CreateTodoItemCommand : IRequest<int>
     {
-        public NewTodoInput TodoInput { get; private set; }
+        public NewTodoInput TodoInput { get; }
 
         public CreateTodoItemCommand(NewTodoInput todoInput)
         {

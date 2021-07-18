@@ -1,14 +1,19 @@
+using System;
+using System.Diagnostics.CodeAnalysis;
 using System.Threading;
 using System.Threading.Tasks;
+using Castle.Components.DictionaryAdapter;
+using Castle.Core.Internal;
+using FluentValidation.TestHelper;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Logging;
 using Moq;
 using NewTodo.Application.TodoItem.Commands;
 using NewTodo.Application.TodoItem.Models;
 using NewTodo.Application.TodoItem.Validators;
 using NewTodo.Controllers;
 using Xunit;
+using static System.Guid;
 using static NewTodo.Test.Helpers.TodoItemGenerator;
 
 namespace NewTodo.Test.Controllers
@@ -19,15 +24,16 @@ namespace NewTodo.Test.Controllers
         private readonly Mock<IMediator> _mediatorMock;
         private readonly TodoController _controller;
         private readonly NewTodoInput _validInput;
-        private readonly NewTodoInput _emptyUserIdInput;
         private readonly NewTodoInputValidator _newTodoInputValidator;
+        private const string ValidTitle = "title";
+        private const string ValidGuid = "5C60F693-BEF5-E011-A485-80EE7300C695";
+        private const string EmptyGuid = "00000000-0000-0000-0000-000000000000";
 
         public TodoControllerTests()
         {
             _newTodoInputValidator = new NewTodoInputValidator();
             _mediatorMock = new Mock<IMediator>();
             _validInput = CreateValidNewTodoInputFaker().Generate();
-            _emptyUserIdInput = CreateEmptyUserIdNewTodoInputFaker().Generate();
             _controller = new TodoController(_mediatorMock.Object);
         }
 
@@ -50,10 +56,19 @@ namespace NewTodo.Test.Controllers
             Assert.IsType<NoContentResult>(action);
         }
 
-        [Fact]
-        public async Task ShouldReturnNull_IfUserIdIsNull()
+        [Theory]
+        [InlineData(EmptyGuid, null)]
+        [InlineData(ValidGuid, null)]
+        [InlineData(EmptyGuid, ValidTitle)]
+        [InlineData(EmptyGuid, "")]
+        public async Task ShouldReturnInvalid_IfProvideInvalidNewTodoInput(string userIdString, string title)
         {
-            var result = await _newTodoInputValidator.ValidateAsync(_emptyUserIdInput);
+            var invalidInput = new NewTodoInput
+            {
+                UserId = new Guid(userIdString),
+                Title = title
+            };
+            var result = await _newTodoInputValidator.TestValidateAsync(invalidInput);
             Assert.False(result.IsValid);
         }
     }
