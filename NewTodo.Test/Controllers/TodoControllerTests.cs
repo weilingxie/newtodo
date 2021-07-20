@@ -1,9 +1,7 @@
 using System;
-using System.Diagnostics.CodeAnalysis;
+using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
-using Castle.Components.DictionaryAdapter;
-using Castle.Core.Internal;
 using FluentValidation.TestHelper;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
@@ -13,7 +11,6 @@ using NewTodo.Application.TodoItem.Models;
 using NewTodo.Application.TodoItem.Validators;
 using NewTodo.Controllers;
 using Xunit;
-using static System.Guid;
 using static NewTodo.Test.Helpers.TodoItemGenerator;
 
 namespace NewTodo.Test.Controllers
@@ -57,19 +54,21 @@ namespace NewTodo.Test.Controllers
         }
 
         [Theory]
-        [InlineData(EmptyGuid, null)]
-        [InlineData(ValidGuid, null)]
-        [InlineData(EmptyGuid, ValidTitle)]
-        [InlineData(EmptyGuid, "")]
-        public async Task ShouldReturnInvalid_IfProvideInvalidNewTodoInput(string userIdString, string title)
+        [MemberData(nameof(InvalidNewTodoInput))]
+        public async Task ShouldReturnInvalid_IfProvideInvalidNewTodoInput(NewTodoInput invalidInput)
         {
-            var invalidInput = new NewTodoInput
-            {
-                UserId = new Guid(userIdString),
-                Title = title
-            };
             var result = await _newTodoInputValidator.TestValidateAsync(invalidInput);
             Assert.False(result.IsValid);
         }
+
+        public static IEnumerable<object[]> InvalidNewTodoInput =>
+            new List<object[]>
+            {
+                new object[] {new NewTodoInput() {UserId = Guid.Empty, Title = ValidTitle}},
+                new object[] {new NewTodoInput() {UserId = Guid.Empty, Title = string.Empty}},
+                new object[] {new NewTodoInput() {UserId = Guid.Empty, Title = null}},
+                new object[] {new NewTodoInput() {UserId = Guid.NewGuid(), Title = string.Empty}},
+                new object[] {new NewTodoInput() {UserId = Guid.NewGuid(), Title = null}}
+            };
     }
 }
