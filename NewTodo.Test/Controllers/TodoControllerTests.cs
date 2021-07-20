@@ -23,8 +23,6 @@ namespace NewTodo.Test.Controllers
         private readonly NewTodoInput _validInput;
         private readonly NewTodoInputValidator _newTodoInputValidator;
         private const string ValidTitle = "title";
-        private const string ValidGuid = "5C60F693-BEF5-E011-A485-80EE7300C695";
-        private const string EmptyGuid = "00000000-0000-0000-0000-000000000000";
 
         public TodoControllerTests()
         {
