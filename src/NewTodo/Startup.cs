@@ -21,7 +21,6 @@ namespace NewTodo
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddFluentValidationServices();
-            services.AddSwaggerGen(c => { c.SwaggerDoc("v1", new OpenApiInfo {Title = "NewTodo", Version = "v1"}); });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -30,8 +29,6 @@ namespace NewTodo
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
-                app.UseSwagger();
-                app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "NewTodo v1"));
             }
 
             app.UseHttpsRedirection();
