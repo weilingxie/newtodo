@@ -14,8 +14,6 @@ namespace NewTodo.Extensions
                 .AddFluentValidation(s => { s.RegisterValidatorsFromAssemblyContaining<NewTodoInputValidator>(); }
                 );
 
-            services.AddScoped<IValidator<NewTodoInput>, NewTodoInputValidator>();
-
             return services;
         }
     }
