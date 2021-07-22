@@ -44,6 +44,16 @@ namespace NewTodo.Test.Controllers
         }
 
         [Fact]
+        public async Task ShouldReturnBadRequest_WhenModelStateIsInvalid()
+        {
+            _controller.ModelState.AddModelError("key", "error message");
+
+            var action = await _controller.CreateTodoItem(new NewTodoInput(), CancellationToken.None);
+
+            Assert.IsType<BadRequestResult>(action);
+        }
+
+        [Fact]
         public async Task ShouldReturnNoContent_IfMediatorIsAbleToSendWithoutErrors()
         {
             var action = await _controller.CreateTodoItem(_validInput, CancellationToken.None);
