@@ -1,7 +1,5 @@
-using FluentValidation;
 using FluentValidation.AspNetCore;
 using Microsoft.Extensions.DependencyInjection;
-using NewTodo.Application.TodoItem.Models;
 using NewTodo.Application.TodoItem.Validators;
 
 namespace NewTodo.Extensions
