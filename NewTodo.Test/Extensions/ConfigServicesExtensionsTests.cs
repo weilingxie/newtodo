@@ -1,7 +1,6 @@
 using System;
 using FluentValidation;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Hosting;
 using Xunit;
 
 namespace NewTodo.Test.Extensions
@@ -9,19 +8,18 @@ namespace NewTodo.Test.Extensions
     [Trait("Category", "UnitTest")]
     public class ConfigServicesExtensionsTests
     {
-        private readonly IHost host;
-        private readonly IServiceProvider services;
+        private readonly IServiceProvider _services;
 
         public ConfigServicesExtensionsTests()
         {
-            host = Program.CreateHostBuilder(Array.Empty<string>()).Build();
-            services = host.Services.CreateScope().ServiceProvider;
+            var host = Program.CreateHostBuilder(Array.Empty<string>()).Build();
+            _services = host.Services.CreateScope().ServiceProvider;
         }
 
         [Fact]
         public void CanFindFluentValidationConfiguration()
         {
-            var result = services.GetService<ValidatorConfiguration>();
+            var result = _services.GetService<ValidatorConfiguration>();
             Assert.NotNull(result);
         }
     }
