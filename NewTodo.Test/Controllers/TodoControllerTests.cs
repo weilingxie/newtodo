@@ -2,10 +2,12 @@ using System.Threading;
 using System.Threading.Tasks;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Logging;
 using Moq;
 using NewTodo.Application.TodoItem.Commands;
 using NewTodo.Application.TodoItem.Models;
 using NewTodo.Controllers;
+using NewTodo.Test.Helpers;
 using Xunit;
 using static NewTodo.Test.Helpers.TodoItemGenerator;
 
@@ -17,12 +19,14 @@ namespace NewTodo.Test.Controllers
         private readonly Mock<IMediator> _mediatorMock;
         private readonly TodoController _controller;
         private readonly NewTodoInput _validInput;
+        private readonly Mock<ILogger<TodoController>> _loggerMock;
 
         public TodoControllerTests()
         {
             _mediatorMock = new Mock<IMediator>();
+            _loggerMock = new Mock<ILogger<TodoController>>();
             _validInput = CreateValidNewTodoInputFaker().Generate();
-            _controller = new TodoController(_mediatorMock.Object);
+            _controller = new TodoController(_mediatorMock.Object, _loggerMock.Object);
         }
 
         [Fact]
@@ -52,6 +56,13 @@ namespace NewTodo.Test.Controllers
             var action = await _controller.CreateTodoItem(_validInput, CancellationToken.None);
 
             Assert.IsType<NoContentResult>(action);
+        }
+
+        [Fact]
+        public async Task ShouldLogTrace_WhenModelStateIsValid()
+        {
+            await _controller.CreateTodoItem(_validInput, CancellationToken.None);
+            _loggerMock.VerifyLogging("Begin: Create todo item");
         }
     }
 }
