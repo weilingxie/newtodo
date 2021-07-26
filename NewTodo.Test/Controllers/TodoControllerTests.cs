@@ -64,5 +64,16 @@ namespace NewTodo.Test.Controllers
             await _controller.CreateTodoItem(_validInput, CancellationToken.None);
             _loggerMock.VerifyLogging("Begin: Create todo item");
         }
+
+        [Fact]
+        public async Task ShouldCallHandler_WhenCallingCreateTodoItem()
+        {
+            await _controller.CreateTodoItem(_validInput, CancellationToken.None);
+
+            _mediatorMock.Verify(
+                m => m.Send(
+                    It.IsAny<CreateTodoItemCommand>(), It.IsAny<CancellationToken>()),
+                Times.Once);
+        }
     }
 }
