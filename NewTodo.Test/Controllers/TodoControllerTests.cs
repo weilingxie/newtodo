@@ -67,7 +67,7 @@ namespace NewTodo.Test.Controllers
         }
 
         [Fact]
-        public async Task ShouldCallHandler_WhenCallingCreateTodoItem()
+        public async Task ShouldCallSend_WhenCallingCreateTodoItem()
         {
             await _controller.CreateTodoItem(_validInput, CancellationToken.None);
 
