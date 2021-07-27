@@ -1,6 +1,6 @@
 using FluentValidation.AspNetCore;
 using Microsoft.Extensions.DependencyInjection;
-using NewTodo.Application.TodoItem.Validators;
+using NewTodo.Application.TodoItems.Validators;
 
 namespace NewTodo.Extensions
 {

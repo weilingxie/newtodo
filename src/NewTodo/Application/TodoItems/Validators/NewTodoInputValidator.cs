@@ -1,7 +1,7 @@
 using FluentValidation;
-using NewTodo.Application.TodoItem.Models;
+using NewTodo.Application.TodoItems.Models;
 
-namespace NewTodo.Application.TodoItem.Validators
+namespace NewTodo.Application.TodoItems.Validators
 {
     public class NewTodoInputValidator : AbstractValidator<NewTodoInput>
     {

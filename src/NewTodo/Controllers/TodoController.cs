@@ -3,8 +3,8 @@ using System.Threading.Tasks;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
-using NewTodo.Application.TodoItem.Commands;
-using NewTodo.Application.TodoItem.Models;
+using NewTodo.Application.TodoItems.Commands;
+using NewTodo.Application.TodoItems.Models;
 
 namespace NewTodo.Controllers
 {
@@ -13,7 +13,7 @@ namespace NewTodo.Controllers
     public class TodoController : ControllerBase
     {
         private readonly IMediator _mediator;
-        private ILogger<TodoController> _logger;
+        private readonly ILogger<TodoController> _logger;
 
         public TodoController(IMediator mediator, ILogger<TodoController> logger)
         {

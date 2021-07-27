@@ -2,8 +2,8 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using FluentValidation.TestHelper;
-using NewTodo.Application.TodoItem.Models;
-using NewTodo.Application.TodoItem.Validators;
+using NewTodo.Application.TodoItems.Models;
+using NewTodo.Application.TodoItems.Validators;
 using Xunit;
 
 namespace NewTodo.Test.Application.TodoItem.Validators

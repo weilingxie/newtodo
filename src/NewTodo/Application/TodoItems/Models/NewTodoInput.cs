@@ -1,6 +1,6 @@
 using System;
 
-namespace NewTodo.Application.TodoItem.Models
+namespace NewTodo.Application.TodoItems.Models
 {
     public class NewTodoInput
     {

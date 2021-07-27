@@ -1,6 +1,6 @@
 using System;
 using Bogus;
-using NewTodo.Application.TodoItem.Models;
+using NewTodo.Application.TodoItems.Models;
 
 namespace NewTodo.Test.Helpers
 {
