@@ -7,9 +7,9 @@ using Moq;
 using NewTodo.Application.TodoItems.Commands;
 using NewTodo.Application.TodoItems.Models;
 using NewTodo.Controllers;
-using NewTodo.Test.Helpers;
 using Xunit;
 using static NewTodo.Test.Helpers.TodoItemGenerator;
+using static NewTodo.Test.Helpers.LoggerMockHelper;
 
 namespace NewTodo.Test.Controllers
 {
@@ -62,7 +62,8 @@ namespace NewTodo.Test.Controllers
         public async Task ShouldLogTrace_WhenModelStateIsValid()
         {
             await _controller.CreateTodoItem(_validInput, CancellationToken.None);
-            _loggerMock.VerifyLogging("Begin: Create todo item");
+
+            VerifyLogger(_loggerMock, LogLevel.Trace, "Begin: Create todo item");
         }
 
         [Fact]
