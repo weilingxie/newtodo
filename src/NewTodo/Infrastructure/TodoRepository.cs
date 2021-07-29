@@ -1,3 +1,4 @@
+using System;
 using System.Threading.Tasks;
 using NewTodo.Domain.Models;
 
@@ -7,7 +8,7 @@ namespace NewTodo.Infrastructure
     {
         public Task CreateTodoItem(TodoItem todoItem)
         {
-            return Task.CompletedTask;
+            throw new NotImplementedException();
         }
     }
 }
