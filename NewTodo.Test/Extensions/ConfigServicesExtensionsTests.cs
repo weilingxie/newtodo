@@ -1,6 +1,7 @@
 using System;
 using FluentValidation;
 using Microsoft.Extensions.DependencyInjection;
+using NewTodo.Infrastructure;
 using Xunit;
 
 namespace NewTodo.Test.Extensions
@@ -20,6 +21,13 @@ namespace NewTodo.Test.Extensions
         public void CanFindFluentValidationConfiguration()
         {
             var result = _services.GetService<ValidatorConfiguration>();
+            Assert.NotNull(result);
+        }
+
+        [Fact]
+        public void CanFindITodoRepository()
+        {
+            var result = _services.GetService<ITodoRepository>();
             Assert.NotNull(result);
         }
     }
