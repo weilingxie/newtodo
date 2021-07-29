@@ -30,5 +30,12 @@ namespace NewTodo.Test.Extensions
             var result = _services.GetService<ITodoRepository>();
             Assert.NotNull(result);
         }
+
+        [Fact]
+        public void CanFindDbContext()
+        {
+            var result = _services.GetService<TodoDbContext>();
+            Assert.NotNull(result);
+        }
     }
 }

@@ -1,6 +1,5 @@
-using System.Data;
 using FluentValidation.AspNetCore;
-using Microsoft.Extensions.Configuration;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using NewTodo.Application.TodoItems.Validators;
 using NewTodo.Infrastructure;
@@ -19,6 +18,7 @@ namespace NewTodo.Extensions
         public static void AddTodoServices(this IServiceCollection services)
         {
             services.AddTransient<ITodoRepository, TodoRepository>();
+            services.AddDbContext<TodoDbContext>(options => options.UseInMemoryDatabase(databaseName: "TodoDb"));
         }
     }
 }
