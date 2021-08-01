@@ -41,6 +41,7 @@ namespace NewTodo.DbMigration
                     .AddSqlServer()
                     .WithGlobalConnectionString(connectionString)
                     .ScanIn(Assembly.GetExecutingAssembly()).For.All())
+                .AddLogging(lb => lb.AddFluentMigratorConsole())
                 .BuildServiceProvider(false);
         }
     }
