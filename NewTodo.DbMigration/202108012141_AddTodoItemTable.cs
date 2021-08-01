@@ -13,6 +13,7 @@ namespace NewTodo.DbMigration
         {
             Create.Table(TableName)
                 .WithIdColumn()
+                .WithColumn("UserId").AsGuid().NotNullable()
                 .WithStringNotNullableColumn("Title", 100)
                 .WithStringNotNullableColumn("State", 5)
                 .WithDateTimeNotNullableColumn("CreateTime")
