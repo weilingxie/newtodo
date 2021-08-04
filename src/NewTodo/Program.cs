@@ -1,5 +1,7 @@
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Hosting;
+using NewTodo.DbMigration;
 
 namespace NewTodo
 {
@@ -7,7 +9,18 @@ namespace NewTodo
     {
         public static void Main(string[] args)
         {
-            CreateHostBuilder(args).Build().Run();
+            var hostBuilder = CreateHostBuilder(args).Build();
+            MigrateDatabase(hostBuilder);
+
+            hostBuilder.Run();
+        }
+        
+        private static void MigrateDatabase(IHost webHostBuilder)
+        {
+            var configuration = webHostBuilder.Services.GetService(typeof(IConfiguration)) as IConfiguration;
+            if (configuration == null) return;
+            var connString = configuration["ConnectionStrings:DefaultConnection"];
+            DbMigrator.Migrate(connString);
         }
 
         public static IHostBuilder CreateHostBuilder(string[] args) =>
