@@ -16,8 +16,8 @@ namespace NewTodo.DbMigration
                 .WithColumn("UserId").AsGuid().NotNullable()
                 .WithStringNotNullableColumn("Title", 100)
                 .WithStringNotNullableColumn("State", 5)
-                .WithDateTimeNotNullableColumn("CreateTime")
-                .WithDateTimeNotNullableColumn("LastUpdatedTime");
+                .WithDateTimeNotNullableColumn("CreatedAt")
+                .WithDateTimeNotNullableColumn("LastUpdatedAt");
         }
 
         public override void Down()
