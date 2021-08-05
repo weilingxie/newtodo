@@ -2,7 +2,7 @@ using System;
 
 namespace NewTodo.Domain.Models
 {
-    public class TodoItem
+    public class TodoItem : EntityBase
     {
         public Guid Id { get; set; }
         public Guid UserId { get; set; }
