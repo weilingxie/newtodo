@@ -1,3 +1,4 @@
+using System;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Hosting;
@@ -14,20 +15,18 @@ namespace NewTodo
 
             hostBuilder.Run();
         }
-        
+
         private static void MigrateDatabase(IHost webHostBuilder)
         {
             var configuration = webHostBuilder.Services.GetService(typeof(IConfiguration)) as IConfiguration;
             if (configuration == null) return;
-            var connString = configuration["ConnectionStrings:DefaultConnection"];
+
+            var connString = Environment.GetEnvironmentVariable("DBCONNECTION");
             DbMigrator.Migrate(connString);
         }
 
         public static IHostBuilder CreateHostBuilder(string[] args) =>
             Host.CreateDefaultBuilder(args)
-                .ConfigureWebHostDefaults(webBuilder =>
-                {
-                    webBuilder.UseStartup<Startup>();
-                });
+                .ConfigureWebHostDefaults(webBuilder => { webBuilder.UseStartup<Startup>(); });
     }
 }
