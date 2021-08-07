@@ -1,6 +1,7 @@
+using System;
 using System.Data;
 using FluentValidation.AspNetCore;
-using Microsoft.Extensions.Configuration;
+using Microsoft.Data.SqlClient;
 using Microsoft.Extensions.DependencyInjection;
 using NewTodo.Application.TodoItems.Validators;
 using NewTodo.Infrastructure;
@@ -19,6 +20,8 @@ namespace NewTodo.Extensions
         public static void AddTodoServices(this IServiceCollection services)
         {
             services.AddTransient<ITodoRepository, TodoRepository>();
+            services.AddScoped<IDbConnection>(provider =>
+                new SqlConnection(Environment.GetEnvironmentVariable("DBCONNECTION")));
         }
     }
 }
