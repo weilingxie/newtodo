@@ -4,8 +4,8 @@ using FluentMigrator;
 namespace NewTodo.DbMigration
 {
     [ExcludeFromCodeCoverage]
-    [Migration(202108012141)]
-    public class _202108012141_AddTodoItemTable : Migration
+    [Migration(202108082300)]
+    public class _202108082300_AddTodoItemTable : Migration
     {
         private const string TableName = "TodoItems";
 
