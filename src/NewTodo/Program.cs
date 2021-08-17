@@ -21,7 +21,7 @@ namespace NewTodo
             var configuration = webHostBuilder.Services.GetService(typeof(IConfiguration)) as IConfiguration;
             if (configuration == null) return;
 
-            var connString = Environment.GetEnvironmentVariable("DBCONNECTION");
+            var connString = configuration.GetConnectionString("TodoDb");
             DbMigrator.Migrate(connString);
         }
 

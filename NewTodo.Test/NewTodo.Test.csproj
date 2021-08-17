@@ -7,14 +7,14 @@
     </PropertyGroup>
 
     <ItemGroup>
-        <PackageReference Include="Bogus" Version="33.0.2"/>
-        <PackageReference Include="Dapper" Version="2.0.90"/>
-        <PackageReference Include="MediatR" Version="9.0.0"/>
-        <PackageReference Include="MediatR.Extensions.Microsoft.DependencyInjection" Version="9.0.0"/>
-        <PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.7.1"/>
-        <PackageReference Include="Moq" Version="4.16.1"/>
-        <PackageReference Include="Respawn" Version="4.0.0"/>
-        <PackageReference Include="xunit" Version="2.4.1"/>
+        <PackageReference Include="Bogus" Version="33.0.2" />
+        <PackageReference Include="Dapper" Version="2.0.90" />
+        <PackageReference Include="MediatR" Version="9.0.0" />
+        <PackageReference Include="MediatR.Extensions.Microsoft.DependencyInjection" Version="9.0.0" />
+        <PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.7.1" />
+        <PackageReference Include="Moq" Version="4.16.1" />
+        <PackageReference Include="Respawn" Version="4.0.0" />
+        <PackageReference Include="xunit" Version="2.4.1" />
         <PackageReference Include="xunit.runner.visualstudio" Version="2.4.3">
             <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
             <PrivateAssets>all</PrivateAssets>
@@ -26,12 +26,12 @@
     </ItemGroup>
 
     <ItemGroup>
-        <ProjectReference Include="..\src\NewTodo\NewTodo.csproj"/>
+        <ProjectReference Include="..\src\NewTodo\NewTodo.csproj" />
     </ItemGroup>
 
     <ItemGroup>
-        <Folder Include="Application"/>
-        <Folder Include="Extensions"/>
+        <Folder Include="Application" />
+        <Folder Include="Extensions" />
     </ItemGroup>
 
 </Project>

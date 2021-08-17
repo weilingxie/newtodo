@@ -20,7 +20,7 @@ namespace NewTodo
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddFluentValidationServices();
-            services.AddTodoServices();
+            services.AddTodoServices(Configuration);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
