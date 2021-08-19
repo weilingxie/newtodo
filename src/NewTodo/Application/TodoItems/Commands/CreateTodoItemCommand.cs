@@ -35,7 +35,7 @@ namespace NewTodo.Application.TodoItems.Commands
                 Id = Guid.NewGuid(),
                 UserId = newTodoInput.UserId,
                 Title = newTodoInput.Title,
-                State = "Todo"
+                State = "todo"
             };
 
             await _todoRepository.CreateTodoItem(todoItem);

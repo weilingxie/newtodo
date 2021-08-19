@@ -33,7 +33,7 @@ namespace NewTodo.Test.Application.TodoItem.Commands
                 r =>
                     r.CreateTodoItem(It.Is<Domain.Models.TodoItem>(t => t.UserId == _validInput.UserId
                                                                         && t.Title == _validInput.Title
-                                                                        && t.State == "Todo")), Times.Once()
+                                                                        && t.State == "todo")), Times.Once()
             );
         }
     }
