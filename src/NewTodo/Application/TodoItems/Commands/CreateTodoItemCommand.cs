@@ -9,7 +9,7 @@ using NewTodo.Domain.Models;
 
 namespace NewTodo.Application.TodoItems.Commands
 {
-    public class CreateTodoItemCommand : IRequest<Guid>
+    public class CreateTodoItemCommand : IRequest<TodoItem>
     {
         public NewTodoInput TodoInput { get; }
 
@@ -19,7 +19,7 @@ namespace NewTodo.Application.TodoItems.Commands
         }
     }
 
-    public class CreateTodoItemCommandHandler : IRequestHandler<CreateTodoItemCommand, Guid>
+    public class CreateTodoItemCommandHandler : IRequestHandler<CreateTodoItemCommand, TodoItem>
     {
         private readonly ITodoRepository _todoRepository;
 
@@ -28,7 +28,7 @@ namespace NewTodo.Application.TodoItems.Commands
             _todoRepository = todoRepository;
         }
 
-        public async Task<Guid> Handle(CreateTodoItemCommand request, CancellationToken cancellationToken)
+        public async Task<TodoItem> Handle(CreateTodoItemCommand request, CancellationToken cancellationToken)
         {
             var newTodoInput = request.TodoInput;
             var todoItem = new TodoItem()
@@ -41,7 +41,7 @@ namespace NewTodo.Application.TodoItems.Commands
 
             await _todoRepository.CreateTodoItem(todoItem);
 
-            return todoItem.Id;
+            return todoItem;
         }
     }
 }

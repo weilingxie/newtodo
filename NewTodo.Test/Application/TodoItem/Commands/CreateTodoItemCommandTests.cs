@@ -16,7 +16,7 @@ namespace NewTodo.Test.Application.TodoItem.Commands
         private readonly Mock<ITodoRepository> _repositoryMock;
         private readonly NewTodoInput _validInput;
         private readonly CreateTodoItemCommand _command;
-        private readonly IRequestHandler<CreateTodoItemCommand, Guid> _handler;
+        private readonly IRequestHandler<CreateTodoItemCommand, Domain.Models.TodoItem> _handler;
 
         public CreateTodoItemCommandTests()
         {
@@ -40,11 +40,15 @@ namespace NewTodo.Test.Application.TodoItem.Commands
         }
 
         [Fact]
-        public async Task ShouldReturnValidGuid_WhenProvideValidNewTodoInput()
+        public async Task ShouldReturnValidTodoItem_WhenProvideValidNewTodoInput()
         {
             var taskResult = await _handler.Handle(_command, CancellationToken.None);
 
-            Assert.Equal(typeof(Guid),taskResult.GetType());
+            Assert.Equal(typeof(Domain.Models.TodoItem),taskResult.GetType());
+            Assert.Equal(typeof(Guid),taskResult.Id.GetType());
+            Assert.Equal(_validInput.UserId,taskResult.UserId);
+            Assert.Equal(_validInput.Title,taskResult.Title);
+            Assert.Equal("todo",taskResult.State);
         }
     }
 }
