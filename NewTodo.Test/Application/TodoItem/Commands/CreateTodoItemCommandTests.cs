@@ -5,9 +5,8 @@ using MediatR;
 using Moq;
 using NewTodo.Application.TodoItems.Commands;
 using NewTodo.Application.TodoItems.Models;
-using NewTodo.Infrastructure;
-using NewTodo.Domain.Models;
 using NewTodo.Domain.Constants;
+using NewTodo.Infrastructure;
 using Xunit;
 using static NewTodo.Test.Helpers.TodoItemGenerator;
 

@@ -2,11 +2,10 @@ using System;
 using System.Threading;
 using System.Threading.Tasks;
 using MediatR;
-using Microsoft.IdentityModel.Tokens;
 using NewTodo.Application.TodoItems.Models;
 using NewTodo.Domain.Constants;
-using NewTodo.Infrastructure;
 using NewTodo.Domain.Models;
+using NewTodo.Infrastructure;
 
 namespace NewTodo.Application.TodoItems.Commands
 {
