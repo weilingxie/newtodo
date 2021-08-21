@@ -6,6 +6,8 @@ using Moq;
 using NewTodo.Application.TodoItems.Commands;
 using NewTodo.Application.TodoItems.Models;
 using NewTodo.Infrastructure;
+using NewTodo.Domain.Models;
+using NewTodo.Domain.Constants;
 using Xunit;
 using static NewTodo.Test.Helpers.TodoItemGenerator;
 
@@ -35,7 +37,7 @@ namespace NewTodo.Test.Application.TodoItem.Commands
                 r =>
                     r.CreateTodoItem(It.Is<Domain.Models.TodoItem>(t => t.UserId == _validInput.UserId
                                                                         && t.Title == _validInput.Title
-                                                                        && t.State == "todo")), Times.Once()
+                                                                        && t.State == TodoState.Todo)), Times.Once()
             );
         }
 
@@ -48,7 +50,7 @@ namespace NewTodo.Test.Application.TodoItem.Commands
             Assert.Equal(typeof(Guid),taskResult.Id.GetType());
             Assert.Equal(_validInput.UserId,taskResult.UserId);
             Assert.Equal(_validInput.Title,taskResult.Title);
-            Assert.Equal("todo",taskResult.State);
+            Assert.Equal(TodoState.Todo,taskResult.State);
         }
     }
 }

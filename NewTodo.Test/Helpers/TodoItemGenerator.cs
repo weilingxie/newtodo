@@ -1,6 +1,7 @@
 using System;
 using Bogus;
 using NewTodo.Application.TodoItems.Models;
+using NewTodo.Domain.Constants;
 using NewTodo.Domain.Models;
 
 namespace NewTodo.Test.Helpers
@@ -21,7 +22,7 @@ namespace NewTodo.Test.Helpers
                 .RuleFor(t => t.Id, f => Guid.NewGuid())
                 .RuleFor(t => t.UserId, f => Guid.NewGuid())
                 .RuleFor(t => t.Title, f => f.Lorem.Word())
-                .RuleFor(t => t.State, f => "todo")
+                .RuleFor(t => t.State, f => TodoState.Todo)
                 .RuleFor(t => t.CreatedAt, f => DateTime.Now)
                 .RuleFor(t => t.LastUpdatedAt, f => DateTime.Now);
 

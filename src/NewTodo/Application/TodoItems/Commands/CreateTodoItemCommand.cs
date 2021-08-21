@@ -4,6 +4,7 @@ using System.Threading.Tasks;
 using MediatR;
 using Microsoft.IdentityModel.Tokens;
 using NewTodo.Application.TodoItems.Models;
+using NewTodo.Domain.Constants;
 using NewTodo.Infrastructure;
 using NewTodo.Domain.Models;
 
@@ -36,7 +37,7 @@ namespace NewTodo.Application.TodoItems.Commands
                 Id = Guid.NewGuid(),
                 UserId = newTodoInput.UserId,
                 Title = newTodoInput.Title,
-                State = "todo"
+                State = TodoState.Todo
             };
 
             await _todoRepository.CreateTodoItem(todoItem);
