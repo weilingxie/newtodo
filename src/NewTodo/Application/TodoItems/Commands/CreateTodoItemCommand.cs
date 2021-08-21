@@ -2,13 +2,14 @@ using System;
 using System.Threading;
 using System.Threading.Tasks;
 using MediatR;
+using Microsoft.IdentityModel.Tokens;
 using NewTodo.Application.TodoItems.Models;
 using NewTodo.Infrastructure;
 using NewTodo.Domain.Models;
 
 namespace NewTodo.Application.TodoItems.Commands
 {
-    public class CreateTodoItemCommand : IRequest
+    public class CreateTodoItemCommand : IRequest<Guid>
     {
         public NewTodoInput TodoInput { get; }
 
@@ -18,7 +19,7 @@ namespace NewTodo.Application.TodoItems.Commands
         }
     }
 
-    public class CreateTodoItemCommandHandler : AsyncRequestHandler<CreateTodoItemCommand>
+    public class CreateTodoItemCommandHandler : IRequestHandler<CreateTodoItemCommand, Guid>
     {
         private readonly ITodoRepository _todoRepository;
 
@@ -27,7 +28,7 @@ namespace NewTodo.Application.TodoItems.Commands
             _todoRepository = todoRepository;
         }
 
-        protected override async Task Handle(CreateTodoItemCommand request, CancellationToken cancellationToken)
+        public async Task<Guid> Handle(CreateTodoItemCommand request, CancellationToken cancellationToken)
         {
             var newTodoInput = request.TodoInput;
             var todoItem = new TodoItem()
@@ -39,6 +40,8 @@ namespace NewTodo.Application.TodoItems.Commands
             };
 
             await _todoRepository.CreateTodoItem(todoItem);
+
+            return todoItem.Id;
         }
     }
 }

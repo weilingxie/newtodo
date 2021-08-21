@@ -1,4 +1,6 @@
+using System;
 using System.Threading;
+using System.Threading.Tasks;
 using MediatR;
 using Moq;
 using NewTodo.Application.TodoItems.Commands;
@@ -14,7 +16,7 @@ namespace NewTodo.Test.Application.TodoItem.Commands
         private readonly Mock<ITodoRepository> _repositoryMock;
         private readonly NewTodoInput _validInput;
         private readonly CreateTodoItemCommand _command;
-        private readonly IRequestHandler<CreateTodoItemCommand> _handler;
+        private readonly IRequestHandler<CreateTodoItemCommand, Guid> _handler;
 
         public CreateTodoItemCommandTests()
         {
@@ -35,6 +37,14 @@ namespace NewTodo.Test.Application.TodoItem.Commands
                                                                         && t.Title == _validInput.Title
                                                                         && t.State == "todo")), Times.Once()
             );
+        }
+
+        [Fact]
+        public async Task ShouldReturnValidGuid_WhenProvideValidNewTodoInput()
+        {
+            var taskResult = await _handler.Handle(_command, CancellationToken.None);
+
+            Assert.Equal(typeof(Guid),taskResult.GetType());
         }
     }
 }
