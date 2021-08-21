@@ -31,7 +31,7 @@ namespace NewTodo.Controllers
 
             var command = new CreateTodoItemCommand(todoInput);
 
-            var todoId = await _mediator.Send(command, cancellationToken);
+            var createdTodoItem = await _mediator.Send(command, cancellationToken);
 
             return NoContent();
         }
