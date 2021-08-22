@@ -41,7 +41,7 @@ namespace NewTodo.Application.TodoItems.Commands
 
             await _todoRepository.CreateTodoItem(todoItem);
 
-            return todoItem;
+            return await Task.FromResult(todoItem);
         }
     }
 }
