@@ -1,6 +1,5 @@
 ﻿using System.Threading;
 using System.Threading.Tasks;
-using AutoMapper;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
@@ -15,13 +14,11 @@ namespace NewTodo.Controllers
     {
         private readonly IMediator _mediator;
         private readonly ILogger<TodoController> _logger;
-        private readonly IMapper _mapper;
 
-        public TodoController(IMediator mediator, ILogger<TodoController> logger, IMapper mapper)
+        public TodoController(IMediator mediator, ILogger<TodoController> logger)
         {
             _mediator = mediator;
             _logger = logger;
-            _mapper = mapper;
         }
 
         [HttpPost]
@@ -36,7 +33,7 @@ namespace NewTodo.Controllers
 
             var createdTodoItem = await _mediator.Send(command, cancellationToken);
 
-            return Ok(_mapper.Map<TodoOutput>(createdTodoItem));
+            return Ok(createdTodoItem);
         }
     }
 }

@@ -1,6 +1,7 @@
 using System;
 using System.Threading;
 using System.Threading.Tasks;
+using AutoMapper;
 using MediatR;
 using NewTodo.Application.TodoItems.Models;
 using NewTodo.Domain.Constants;
@@ -9,7 +10,7 @@ using NewTodo.Infrastructure;
 
 namespace NewTodo.Application.TodoItems.Commands
 {
-    public class CreateTodoItemCommand : IRequest<TodoItem>
+    public class CreateTodoItemCommand : IRequest<TodoOutput>
     {
         public NewTodoInput TodoInput { get; }
 
@@ -19,16 +20,18 @@ namespace NewTodo.Application.TodoItems.Commands
         }
     }
 
-    public class CreateTodoItemCommandHandler : IRequestHandler<CreateTodoItemCommand, TodoItem>
+    public class CreateTodoItemCommandHandler : IRequestHandler<CreateTodoItemCommand, TodoOutput>
     {
         private readonly ITodoRepository _todoRepository;
+        private readonly IMapper _mapper;
 
-        public CreateTodoItemCommandHandler(ITodoRepository todoRepository)
+        public CreateTodoItemCommandHandler(ITodoRepository todoRepository, IMapper mapper)
         {
             _todoRepository = todoRepository;
+            _mapper = mapper;
         }
 
-        public async Task<TodoItem> Handle(CreateTodoItemCommand request, CancellationToken cancellationToken)
+        public async Task<TodoOutput> Handle(CreateTodoItemCommand request, CancellationToken cancellationToken)
         {
             var newTodoInput = request.TodoInput;
             var todoItem = new TodoItem()
@@ -41,7 +44,7 @@ namespace NewTodo.Application.TodoItems.Commands
 
             await _todoRepository.CreateTodoItem(todoItem);
 
-            return await Task.FromResult(todoItem);
+            return await Task.FromResult(_mapper.Map<TodoOutput>(todoItem));
         }
     }
 }

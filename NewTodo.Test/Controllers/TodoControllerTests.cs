@@ -1,7 +1,5 @@
-using System.Diagnostics;
 using System.Threading;
 using System.Threading.Tasks;
-using AutoMapper;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
@@ -9,7 +7,6 @@ using Moq;
 using NewTodo.Application.TodoItems.Commands;
 using NewTodo.Application.TodoItems.Models;
 using NewTodo.Controllers;
-using NewTodo.Domain.Constants;
 using NewTodo.Domain.Models;
 using Xunit;
 using static NewTodo.Test.Helpers.TodoItemGenerator;
@@ -25,16 +22,14 @@ namespace NewTodo.Test.Controllers
         private readonly NewTodoInput _validInput;
         private readonly Mock<ILogger<TodoController>> _loggerMock;
         private readonly TodoItem _validTodo;
-        private readonly Mock<IMapper> _mapperMock;
 
         public TodoControllerTests()
         {
             _mediatorMock = new Mock<IMediator>();
             _loggerMock = new Mock<ILogger<TodoController>>();
-            _mapperMock = new Mock<IMapper>();
             _validInput = CreateValidNewTodoInputFaker().Generate();
             _validTodo = CreateValidTodoFaker().Generate();
-            _controller = new TodoController(_mediatorMock.Object, _loggerMock.Object, _mapperMock.Object);
+            _controller = new TodoController(_mediatorMock.Object, _loggerMock.Object);
         }
 
         [Fact]
@@ -83,43 +78,6 @@ namespace NewTodo.Test.Controllers
                 m => m.Send(
                     It.IsAny<CreateTodoItemCommand>(), It.IsAny<CancellationToken>()),
                 Times.Once);
-        }
-
-        [Fact]
-        public async Task ShouldReturnTodoOutput_IfProvideValidNewTodoInputForCreateTodoItem()
-        {
-            var validTodo = new TodoItem()
-            {
-                Id = _validTodo.Id,
-                UserId = _validInput.UserId,
-                Title = _validInput.Title,
-                State = TodoState.Todo,
-                CreatedAt = _validTodo.CreatedAt,
-                LastUpdatedAt = _validTodo.LastUpdatedAt
-            };
-
-            var validTodoOutput = new TodoOutput()
-            {
-                Id = _validTodo.Id,
-                UserId = _validInput.UserId,
-                Title = _validInput.Title,
-                State = TodoState.Todo
-            };
-
-            _mediatorMock.Setup(c => c.Send(
-                    It.IsAny<CreateTodoItemCommand>(), 
-                    It.IsAny<CancellationToken>()))
-                .ReturnsAsync(validTodo);
-
-            _mapperMock.Setup( m => m.Map<TodoOutput>(It.IsAny<TodoItem>()))
-                .Returns((TodoItem src) => validTodoOutput);
-
-            var actionResult = await _controller.CreateTodoItem(_validInput, CancellationToken.None);
-            var okResult = actionResult as OkObjectResult;
-            Debug.Assert(okResult != null, nameof(okResult) + " != null");
-            var todoOutput = okResult.Value as TodoOutput;
-            
-            Assert.True(validTodoOutput.Equals(todoOutput));
         }
     }
 }
