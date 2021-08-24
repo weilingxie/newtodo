@@ -21,7 +21,7 @@ namespace NewTodo.Extensions
         {
             services.AddTransient<ITodoRepository, TodoRepository>();
             services.AddScoped<IDbConnection>(provider =>
-                new SqlConnection(configuration.GetConnectionString("TodoDb")));
+                new SqlConnection(configuration.GetConnectionString("DefaultConnection")));
         }
     }
 }

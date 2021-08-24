@@ -17,7 +17,7 @@ namespace NewTodo.Test.Helpers
         public static string GetConnectionString(string outputPath)
         {
             var config = GetIConfigurationRoot(outputPath);
-            var connectionString = config["ConnectionStrings:TodoDb"];
+            var connectionString = config["ConnectionStrings:DefaultConnection"];
             return connectionString;
         }
     }
