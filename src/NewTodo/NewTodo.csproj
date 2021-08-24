@@ -16,6 +16,7 @@
 
     <ItemGroup>
         <ProjectReference Include="..\..\NewTodo.DbMigration\NewTodo.DbMigration.csproj" />
+        <ProjectReference Include="..\..\NewTodo.Domain\NewTodo.Domain.csproj" />
     </ItemGroup>
 
 </Project>

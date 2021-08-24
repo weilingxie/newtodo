@@ -1,7 +1,8 @@
 using AutoMapper;
+using NewTodo.Application.TodoItems.Models;
 using NewTodo.Domain.Models;
 
-namespace NewTodo.Application.TodoItems.Models.Mapping
+namespace NewTodo.Mappers
 {
     public class DomainToTodoOutputProfile : Profile
     {
