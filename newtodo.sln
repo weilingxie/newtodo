@@ -8,6 +8,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NewTodo.DbMigration", "NewT
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NewTodo.Domain", "NewTodo.Domain\NewTodo.Domain.csproj", "{8305AF51-4978-4E88-9D99-87E4593A0FC3}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NewTodo.IntegrationTest", "NewTodo.IntegrationTest\NewTodo.IntegrationTest.csproj", "{71590DB6-8F40-45AE-9D3C-016F252260E2}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -30,5 +32,9 @@ Global
 		{8305AF51-4978-4E88-9D99-87E4593A0FC3}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8305AF51-4978-4E88-9D99-87E4593A0FC3}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8305AF51-4978-4E88-9D99-87E4593A0FC3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{71590DB6-8F40-45AE-9D3C-016F252260E2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{71590DB6-8F40-45AE-9D3C-016F252260E2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{71590DB6-8F40-45AE-9D3C-016F252260E2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{71590DB6-8F40-45AE-9D3C-016F252260E2}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
