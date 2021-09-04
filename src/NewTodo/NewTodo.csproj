@@ -5,7 +5,18 @@
     </PropertyGroup>
 
     <ItemGroup>
-        <PackageReference Include="Swashbuckle.AspNetCore" Version="5.6.3"/>
+        <PackageReference Include="AutoMapper" Version="10.1.1" />
+        <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="8.1.1" />
+        <PackageReference Include="Dapper" Version="2.0.90" />
+        <PackageReference Include="FluentValidation.AspNetCore" Version="10.2.3" />
+        <PackageReference Include="MediatR" Version="9.0.0" />
+        <PackageReference Include="MediatR.Extensions.Microsoft.DependencyInjection" Version="9.0.0" />
+        <PackageReference Include="Swashbuckle.AspNetCore" Version="5.6.3" />
+    </ItemGroup>
+
+    <ItemGroup>
+        <ProjectReference Include="..\..\NewTodo.DbMigration\NewTodo.DbMigration.csproj" />
+        <ProjectReference Include="..\..\NewTodo.Domain\NewTodo.Domain.csproj" />
     </ItemGroup>
 
 </Project>
