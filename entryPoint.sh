@@ -1,0 +1,1 @@
+./dbInitial.sh & /opt/mssql/bin/sqlservr

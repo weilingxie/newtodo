@@ -1,0 +1,19 @@
+version: '3'
+services:
+  newtodo-db:
+    image: newtodo-sqlserver
+    environment: 
+      ACCEPT_EULA: "Y"
+      SA_PASSWORD: "Password@12345"
+    ports:
+      - "1433:1433"
+  newtodo-app:
+    build: 
+      context: ./
+      dockerfile: App.Dockerfile
+    environment: 
+      SQLCONNSTR_DefaultConnection: "server=newtodo-db;uid=sa;pwd=Password@12345;database=TodoDb"
+    ports:
+      - "8080:80"
+    depends_on:
+      - newtodo-db
